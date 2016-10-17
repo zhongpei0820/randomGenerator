@@ -9,8 +9,8 @@ import java.util.Random;
  */
 public class sequenceGenerator {
 
-    Random random;
-    String encryptAlgorithm;
+    private Random random;
+    private String encryptAlgorithm;
 
     public sequenceGenerator() {
         random = new Random();
