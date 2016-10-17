@@ -11,7 +11,14 @@ public class numberGenerator {
         random = new Random();
     }
 
-    //Generate k random integers from 1 to n.
+
+    /**
+     * Generate k random integers from 1 to n.
+     *
+     * @param n the range of random number
+     * @param k the number of elements generated
+     * @return A k-length array
+     */
     public int[] generateNoDup(int n, int k) {
         int[] array = new int[n + 1];
         for (int i = 0; i <= n; i++) {
@@ -26,7 +33,14 @@ public class numberGenerator {
         return Arrays.copyOfRange(array, 0, k + 1);
     }
 
-    //Generate k random integers from start(inclusive) to end(inclusive) without duplicates.
+
+    /**
+     * Generate k random integers from start(inclusive) to end(inclusive) without duplicates.
+     * @param start the start index
+     * @param end the end index
+     * @param k the number of elements generated
+     * @return A k-length array
+     */
     public int[] generateNoDup(int start, int end, int k) {
         int length = end - start + 1;
         int[] array = new int[length];
@@ -41,4 +55,6 @@ public class numberGenerator {
         }
         return Arrays.copyOfRange(array, 0, k + 1);
     }
+
+
 }
