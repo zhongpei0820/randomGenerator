@@ -1,3 +1,3 @@
 # randomGenerator
 
-#A random number generator implemented in JAVA
+A random number generator implemented in JAVA
