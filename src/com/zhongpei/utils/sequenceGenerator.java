@@ -31,13 +31,13 @@ public class sequenceGenerator {
         String[] res = new String[k];
         for (int i = 0; i < k; i++) {
             long data = System.currentTimeMillis() + random.nextLong();
-            res[i] = hashFuction(String.valueOf(data));
+            res[i] = hashFunction(String.valueOf(data));
         }
         return res;
     }
 
 
-    private String hashFuction(String data) {
+    private String hashFunction(String data) {
         StringBuilder sb = new StringBuilder();
         try {
             MessageDigest md5 = MessageDigest.getInstance(encryptAlgorithm);
