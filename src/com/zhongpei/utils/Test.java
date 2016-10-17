@@ -1,4 +1,7 @@
+package com.zhongpei.utils;
+
 import java.util.HashSet;
+
 
 /**
  * Created by zhongpei on 2016/10/16.
@@ -8,10 +11,14 @@ public class Test {
     private final static int RANGE_START = 1000;
     private final static int RANGE_END = 100000000;
     private final static int NUMBER_OF_ELEMENTS = 10000;
+    private final static int NUMBER_OF_SEQUENCES = 10000000;
 
 
     public static void main(String args[]) {
 
+
+        //Test unique string sequences
+        Test.uniqueSequenceTest();
 
         //Test the runtime of generating random numbers.
         Test.timeTest();
@@ -30,6 +37,24 @@ public class Test {
 
     }
 
+    private static void uniqueSequenceTest() {
+
+        sequenceGenerator sG = new sequenceGenerator();
+        HashSet<String> set = new HashSet<>();
+
+        System.out.println("Testing duplicates...");
+
+        String[] res = sG.generateNoDup(NUMBER_OF_SEQUENCES);
+
+        for (int i = 0; i < NUMBER_OF_SEQUENCES; i++) {
+            if (!set.add(res[i])) {
+                System.out.println("No Duplicates : false");
+                return;
+            }
+        }
+
+        System.out.println("No Duplicates : true");
+    }
 
     private static void timeTest() {
 
