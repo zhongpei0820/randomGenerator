@@ -5,7 +5,8 @@ import java.util.HashSet;
  */
 public class Test {
 
-    private final static int RANGE = 100000000;
+    private final static int RANGE_START = 1000;
+    private final static int RANGE_END = 100000000;
     private final static int NUMBER_OF_ELEMENTS = 10000;
 
 
@@ -22,6 +23,11 @@ public class Test {
 
         //Test runtime memory
         Test.memoryTest();
+
+
+        //Test range
+        Test.rangeTest();
+
     }
 
 
@@ -30,10 +36,10 @@ public class Test {
         numberGenerator nG = new numberGenerator();
 
         System.out.println("Testing runtime...");
-        System.out.println("Generating " + NUMBER_OF_ELEMENTS + " random numbers from 0 to " + RANGE + " ...");
+        System.out.println("Generating " + NUMBER_OF_ELEMENTS + " random numbers from 0 to " + RANGE_END + " ...");
 
         long startTime = System.currentTimeMillis();
-        nG.generateNoDup(RANGE, NUMBER_OF_ELEMENTS);
+        nG.generateNoDup(RANGE_END, NUMBER_OF_ELEMENTS);
         long endTime = System.currentTimeMillis();
 
         System.out.print("The time is ");
@@ -44,20 +50,48 @@ public class Test {
     private static void uniqueTest() {
         numberGenerator nG = new numberGenerator();
         HashSet<Integer> hashSet = new HashSet<>();
+
         System.out.println("Testing duplicates...");
-        int[] random = nG.generateNoDup(RANGE, NUMBER_OF_ELEMENTS);
+
+        int[] random = nG.generateNoDup(RANGE_END, NUMBER_OF_ELEMENTS);
+
         boolean flag = true;
         for (int i = 0; i < random.length; i++) {
             if (!hashSet.add(random[i])) flag = false;
         }
+
         System.out.println("No duplicates :" + flag);
     }
 
     private static void memoryTest() {
         Runtime.getRuntime().gc();
+
         numberGenerator nG = new numberGenerator();
-        nG.generateNoDup(RANGE, NUMBER_OF_ELEMENTS);
+
+        nG.generateNoDup(RANGE_END, NUMBER_OF_ELEMENTS);
+
         System.out.println((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024L * 1024L) + "MB");
+
         Runtime.getRuntime().gc();
+    }
+
+    private static void rangeTest() {
+
+        numberGenerator nG = new numberGenerator();
+
+        System.out.println("Testing Random numbers in the range from " + RANGE_START + " to " + RANGE_END);
+
+        int[] array = nG.generateNoDup(RANGE_START, RANGE_END, NUMBER_OF_ELEMENTS);
+
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < array.length; i++) {
+            min = Math.min(min, array[i]);
+            max = Math.max(max, array[i]);
+        }
+
+        boolean res = (min >= 0) && (max <= RANGE_END);
+        System.out.println("Random numbers in the range:" + res);
     }
 }
