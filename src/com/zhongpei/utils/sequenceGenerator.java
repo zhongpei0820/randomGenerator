@@ -18,6 +18,7 @@ public class sequenceGenerator {
     }
 
     public sequenceGenerator(String encryptAlgorithm) {
+        random = new Random();
         this.encryptAlgorithm = encryptAlgorithm;
     }
 
